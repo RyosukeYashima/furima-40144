@@ -15,8 +15,10 @@
 | id        | bigint | not null, primary key|
 | image     | string | not null             |
 | text      | text   | not null             |
+| name      | text   | not null             |
+| categories| text   | not null             |
+| price     | integer| not null             |
 | user_id   | bigint | not null             |
-
 
 ##　shoppings　テーブル
 | Column    | Type   | Options              |
