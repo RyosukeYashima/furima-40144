@@ -1,62 +1,56 @@
 ##　users　テーブル
-| Column    | Type   | Options              |
-| --------- | ------ | -------------------- |
-| id        | bigint | not null, primary key|
-| nickname  | string | not null             |
-| email     | string | not null, unique     |
-| password  | string | not null             |
-| name      | string | not null             |
-| birthday  | date   | not null             |
-| kana      | string | not null             |
+| Column              | Type   | Options                |
+| ---------           | ------ | ---------------------- |
+| id                  | bigint | null: false, primary key |
+| nickname            | string | null: false              |
+| email               | string | null: false, unique:true |
+| encrypted_password  | string | null: false              |
+| name                | string | null: false              |
+| birthday            | date   | null: false              |
+| kana                | string | null: false              |
 ### Association
 has_many :items
-has_one :address
 has_many :shoppings
 
 ## items　テーブル
-| Column              | Type   | Options              |
-| ---------           | ------ | -------------------- |
-| id                  | bigint | not null, primary key|
-| image               | string | not null             |
-| name                | string | not null             |
-| categories          | string | not null             |
-| price               | integer| not null             |
-| user_id             | bigint | not null             |
-| explanation         | text   | not null             |
-| condition           | string | not null             |
-| shipping_fee_burden | string  | not null            |
-| shipping_from       | string  | not null            |
-| days_to_ship        | integer | not null            |
+| Column              | Type   | Options                |
+| ---------           | ------ | ---------------------- |
+| id                  | bigint | null: false, primary key |
+| name                | string | null: false              |
+| categories          | string | null: false              |
+| price               | integer| null: false              |
+| user_id             | bigint | null: false              |
+| explanation         | text   | null: false              |
+| condition           | string | null: false              |
+| shipping_fee_burden | string | null: false              |
+| shipping_from       | string | null: false              |
+| days_to_ship        | integer| null: false              |
 ### Association
 belongs_to :user
 has_one :shopping
 
-
 ## shoppings テーブル
-| Column              | Type    | Options                       |
-| ------------------- | ------- | ----------------------------- |
-| id                  | bigint  | not null, primary key         |
-| user_id             | bigint  | not null, foreign key         |
-| item_id             | bigint  | not null, foreign key         |
-| credit_card_number  | string  | not null                      |
-| cvc                 | string  | not null                      |
-| expiration_date     | string  | not null                      |
+| Column              | Type   | Options                |
+| ------------------- | ------ | ---------------------- |
+| id                  | bigint | null: false, primary key |
+| user_id             | bigint | null: false, foreign key |
+| item_id             | bigint | null: false, foreign key |
+
 ### Association
 belongs_to :user
 belongs_to :item
 has_one :address
 
 ##　addresses　テーブル
-| Column               | Type    | Options              |
-| ---------            | ------  | -------------------- |
-| id                   | bigint  | not null, primary key|
-| user_id              | bigint  | not null,foreign key |
-| post_code            | string  | not null             |
-| building_name        | string  |                      |
-| prefectures          | string  | not null             |
-| municipalities       | string  | not null             |
-| street_address       | string  | not null             |
-| phone_number         | string  | not null             |
+| Column          | Type   | Options                |
+| --------------- | ------ | ---------------------- |
+| id              | bigint | null: false, primary key |
+| post_code       | string | null: false              |
+| building_name   | string |                          |
+| shipping_from   | string | null: false              |
+| municipality    | string | null: false              |
+| street_address  | string | null: false              |
+| phone_number    | string | null: false              |
+
 ### Association
 belongs_to :user
-belongs_to :shopping
