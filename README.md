@@ -53,4 +53,4 @@ has_one :address
 | phone_number    | string | null: false              |
 
 ### Association
-belongs_to :user
+belongs_to :shopping
