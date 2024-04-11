@@ -19,15 +19,12 @@ has_many :shoppings
 | ---------           | ------     | ---------------------- |
 | id                  | bigint     | null: false, primary key |
 | name                | string     | null: false              |
-| categories          | string     | null: false              |
 | price               | integer    | null: false              |
 | user                | references | null: false              |
 | explanation         | text       | null: false              |
-| condition           | string     | null: false              |
-| shipping_fee_burden | string     | null: false              |
-| shipping_from       | string     | null: false              |
-| days_to_ship        | integer    | null: false              |
-| shopping            | references | null: false, foreign key |
+| title               | string     | null: false              |
+| text                | text       | null: false              |
+| shopping_id         | integer    | null: false              |
 ### Association
 belongs_to :user
 has_one :shopping
@@ -38,7 +35,6 @@ has_one :shopping
 | id                  | bigint     | null: false, primary key |
 | user                | references | null: false, foreign key |
 | item                | references | null: false, foreign key |
-
 ### Association
 belongs_to :user
 belongs_to :item
@@ -54,6 +50,6 @@ has_one :address
 | municipality    | string | null: false              |
 | street_address  | string | null: false              |
 | phone_number    | string | null: false              |
-
+| shopping        | references | null: false, foreign key |
 ### Association
 belongs_to :shopping
