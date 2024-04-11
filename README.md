@@ -5,36 +5,39 @@
 | nickname            | string | null: false              |
 | email               | string | null: false, unique:true |
 | encrypted_password  | string | null: false              |
-| name                | string | null: false              |
+| first_name          | string | null: false              |
+| last_name           | string | null: false              |
 | birthday            | date   | null: false              |
-| kana                | string | null: false              |
+| kana_first_name     | string | null: false              |
+| kana_last_name      | string | null: false              |
 ### Association
 has_many :items
 has_many :shoppings
 
 ## items　テーブル
-| Column              | Type   | Options                |
-| ---------           | ------ | ---------------------- |
-| id                  | bigint | null: false, primary key |
-| name                | string | null: false              |
-| categories          | string | null: false              |
-| price               | integer| null: false              |
-| user_id             | bigint | null: false              |
-| explanation         | text   | null: false              |
-| condition           | string | null: false              |
-| shipping_fee_burden | string | null: false              |
-| shipping_from       | string | null: false              |
-| days_to_ship        | integer| null: false              |
+| Column              | Type       | Options                |
+| ---------           | ------     | ---------------------- |
+| id                  | bigint     | null: false, primary key |
+| name                | string     | null: false              |
+| categories          | string     | null: false              |
+| price               | integer    | null: false              |
+| user                | references | null: false              |
+| explanation         | text       | null: false              |
+| condition           | string     | null: false              |
+| shipping_fee_burden | string     | null: false              |
+| shipping_from       | string     | null: false              |
+| days_to_ship        | integer    | null: false              |
+| shopping            | references | null: false, foreign key |
 ### Association
 belongs_to :user
 has_one :shopping
 
 ## shoppings テーブル
-| Column              | Type   | Options                |
-| ------------------- | ------ | ---------------------- |
-| id                  | bigint | null: false, primary key |
-| user_id             | bigint | null: false, foreign key |
-| item_id             | bigint | null: false, foreign key |
+| Column              | Type       | Options                |
+| ------------------- | ------     | ---------------------- |
+| id                  | bigint     | null: false, primary key |
+| user                | references | null: false, foreign key |
+| item                | references | null: false, foreign key |
 
 ### Association
 belongs_to :user
