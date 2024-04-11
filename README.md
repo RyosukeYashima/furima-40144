@@ -22,8 +22,11 @@ has_many :shoppings
 | price               | integer    | null: false              |
 | user                | references | null: false              |
 | explanation         | text       | null: false              |
-| title               | string     | null: false              |
-| text                | text       | null: false              |
+| category            | string     | null: false              |
+| condition           | string     | null: false              |
+| shipping_fee_burden | string     | null: false              |
+| shipping_from       | string     | null: false              |
+| days_to_ship        | integer    | null: false              |
 | shopping_id         | integer    | null: false              |
 ### Association
 belongs_to :user
