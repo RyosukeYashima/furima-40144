@@ -15,19 +15,19 @@ has_many :items
 has_many :shoppings
 
 ## items　テーブル
-| Column              | Type       | Options                |
-| ---------           | ------     | ---------------------- |
-| id                  | bigint     | null: false, primary key |
-| name                | string     | null: false              |
-| price               | integer    | null: false              |
-| user                | references | null: false              |
-| explanation         | text       | null: false              |
-| category            | string     | null: false              |
-| condition           | string     | null: false              |
-| shipping_fee_burden | string     | null: false              |
-| shipping_from       | string     | null: false              |
-| days_to_ship        | integer    | null: false              |
-| shopping_id         | integer    | null: false              |
+| Column                 | Type       | Options                |
+| ---------              | ------     | ---------------------- |
+| id                     | bigint     | null: false, primary key |
+| name                   | string     | null: false              |
+| price                  | integer    | null: false              |
+| user                   | references | null: false,foreign_key: true  |
+| explanation            | text       | null: false              |
+| category_id            | integer    | null: false              |
+| condition_id           | integer    | null: false              |
+| shipping_fee_burden_id | integer    | null: false              |
+| shipping_from_id       | integer    | null: false              |
+| days_to_ship_id        | integer    | null: false              |
+
 ### Association
 belongs_to :user
 has_one :shopping
@@ -36,8 +36,8 @@ has_one :shopping
 | Column              | Type       | Options                |
 | ------------------- | ------     | ---------------------- |
 | id                  | bigint     | null: false, primary key |
-| user                | references | null: false, foreign key |
-| item                | references | null: false, foreign key |
+| user                | references | null: false, foreign_key: true |
+| item                | references | null: false, foreign_key: true |
 ### Association
 belongs_to :user
 belongs_to :item
@@ -49,10 +49,10 @@ has_one :address
 | id              | bigint | null: false, primary key |
 | post_code       | string | null: false              |
 | building_name   | string |                          |
-| shipping_from   | string | null: false              |
+| shipping_from_id| integer| null: false              |
 | municipality    | string | null: false              |
 | street_address  | string | null: false              |
 | phone_number    | string | null: false              |
-| shopping        | references | null: false, foreign key |
+| shopping        | references | null: false, foreign key :true |
 ### Association
 belongs_to :shopping
