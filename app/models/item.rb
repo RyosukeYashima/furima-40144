@@ -1,11 +1,19 @@
 class Item < ApplicationRecord
-  extend ActiveHash::Associations::ActiveRecordExtensions
-  belongs_to :days_to_ship,:shipping_fee_burden,:condition,:category,:shipping_from
   belongs_to :user
+  extend ActiveHash::Associations::ActiveRecordExtensions
+  belongs_to :DaysToShip
+  belongs_to :ShippingFeeBurden
+  belongs_to :condition
+  belongs_to :category
+  belongs_to :ShippingFrom
 
-  validates :category_id, presence: true, numericality: { other_than: 1 , message: "can't be blank"}
-  validates :condition_id, presence: true, numericality: { other_than: 1 , message: "can't be blank"}
-  validates :shipping_fee_burden_id, presence: true, numericality: { other_than: 1 , message: "can't be blank"}
-  validates :shipping_from_id, presence: true, numericality: { other_than: 1 , message: "can't be blank"}
-  validates :days_to_ship_id, presence: true, numericality: { other_than: 1 , message: "can't be blank"}
+  validates :category_id, presence: true, numericality: { other_than: 1, message: "can't be blank" }
+  validates :condition_id, presence: true, numericality: { other_than: 1, message: "can't be blank" }
+  validates :shipping_fee_burden_id, presence: true, numericality: { other_than: 1, message: "can't be blank" }
+  validates :shipping_from_id, presence: true, numericality: { other_than: 1, message: "can't be blank" }
+  validates :days_to_ship_id, presence: true, numericality: { other_than: 1, message: "can't be blank" }
+  validates :name, presence: true
+  validates :image, presence: true
+  validates :price, presence: true
+  validates :explanation, presence: true
 end

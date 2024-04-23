@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   devise_for :users  
-  references :items
+  resources :items
   root to: 'items#index'
 
 end

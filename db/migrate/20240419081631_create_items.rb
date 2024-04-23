@@ -1,6 +1,5 @@
 class CreateItems < ActiveRecord::Migration[7.0]
-  extend ActiveHash::Associations::ActiveRecordExtensions
-  belongs_to :genre
+
   
   def change
     create_table :items do |t|
