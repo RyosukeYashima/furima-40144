@@ -15,6 +15,8 @@ class Item < ApplicationRecord
   validates :days_to_ship_id, presence: true, numericality: { other_than: 1, message: "can't be blank" }
   validates :name, presence: true
   validates :image, presence: true
-  validates :price, presence: true
+  validates :price, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 300, less_than_or_equal_to: 9999999 }
   validates :explanation, presence: true
+
+
 end
