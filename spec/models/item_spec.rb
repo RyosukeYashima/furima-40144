@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Item, type: :model do
   before do
-    @item = FactoryBot.build(:item)  # テスト用の商品を作成する
+    @item = FactoryBot.build(:item)
   end
 
   describe '商品出品機能' do
@@ -13,12 +13,6 @@ RSpec.describe Item, type: :model do
     end
 
     context '必須項目が欠けている場合' do
-      it 'カテゴリーが欠けている場合、商品が無効であること' do
-        @item.category = nil
-        @item.valid?
-        expect(@item.errors.full_messages).to include("Category can't be blank")
-      end
-
       it '商品名が欠けている場合、商品が無効であること' do
         @item.name = ''
         @item.valid?
@@ -37,34 +31,34 @@ RSpec.describe Item, type: :model do
         expect(@item.errors.full_messages).to include("Image can't be blank")
       end
 
-      it 'カテゴリーが選択肢の1以外の場合、商品が無効であること' do
-        @item.category_id = 2
+      it 'カテゴリーが未選択の場合、商品が無効であること' do
+        @item.category_id = 1
         @item.valid?
-        expect(@item.errors.full_messages).to include("Category must be 1")
+        expect(@item.errors.full_messages).to include("Category can't be blank")
       end
 
-      it '商品の状態が選択肢の1以外の場合、商品が無効であること' do
-        @item.condition_id = 2
+      it '商品の状態が未選択の以外の場合、商品が無効であること' do
+        @item.condition_id = 1
         @item.valid?
-        expect(@item.errors.full_messages).to include("Condition must be 1")
+        expect(@item.errors.full_messages).to include("Condition can't be blank")
       end
 
-      it '配送料の負担が選択肢の1以外の場合、商品が無効であること' do
-        @item.shipping_fee_burden_id = 2
+      it '配送料の負担が未選択の以外の場合、商品が無効であること' do
+        @item.shipping_fee_burden_id = 1
         @item.valid?
-        expect(@item.errors.full_messages).to include("Shipping fee burden must be 1")
+        expect(@item.errors.full_messages).to include("Shipping fee burden can't be blank")
       end
 
-      it '発送元の地域が選択肢の1以外の場合、商品が無効であること' do
-        @item.shipping_from_id = 2
+      it '発送元の地域が未選択の以外の場合、商品が無効であること' do
+        @item.shipping_from_id = 1
         @item.valid?
-        expect(@item.errors.full_messages).to include("Shipping from must be 1")
+        expect(@item.errors.full_messages).to include("Shipping from can't be blank")
       end
 
-      it '発送までの日数が選択肢の1以外の場合、商品が無効であること' do
-        @item.days_to_ship_id = 2
+      it '発送までの日数が未選択の以外の場合、商品が無効であること' do
+        @item.days_to_ship_id = 1
         @item.valid?
-        expect(@item.errors.full_messages).to include("Days to ship must be 1")
+        expect(@item.errors.full_messages).to include("Days to ship can't be blank")
       end
 
       it '価格が300未満の場合、商品が無効であること' do
