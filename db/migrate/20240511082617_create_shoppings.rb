@@ -5,7 +5,7 @@ class CreateShoppings < ActiveRecord::Migration[7.0]
       t.references :item, null: false, foreign_key: true
 
 
-      t.integer :price ,nill: false
+      
 
       t.timestamps
     end
