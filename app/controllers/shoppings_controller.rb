@@ -5,8 +5,9 @@ class ShoppingsController < ApplicationController
   end
 
   def create
-    @shopping_form = ShoppingForm.new(shopping_params)
+    @shopping_form = ShoppingForm.new(shopping_form_params)
     if @shopping_form.valid?
+
       @shopping_form.save(params,current_user.id)
       return  redirect_to root_path
     else
@@ -18,6 +19,6 @@ class ShoppingsController < ApplicationController
   private
 
   def shopping_form_params
-    params.require(:shopping_form).permit(:user_id, :item_id, :post_code, :building_name, :shipping_from_id, :municipality, :street_address, :phone_number)
+    params.require(:shopping_form).permit(:user_id, :item_id, :post_code, :building_name, :shipping_from_id, :municipality, :street_address, :phone_number).merge(item_id: params[:item_id], user_id: current_user.id)
   end
 end
