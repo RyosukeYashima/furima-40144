@@ -1,7 +1,6 @@
 class Address < ApplicationRecord
-
   belongs_to :shopping
-
+  validates :shipping_from_id, presence: true, numericality: { other_than: 1, message: "can't be blank" }
   validates :post_code, presence: true, format: { with: /\A\d{3}-\d{4}\z/, message: "は「3桁ハイフン4桁」の形式で入力してください" }
   validates :municipality, presence: true
   validates :street_address, presence: true

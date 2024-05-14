@@ -8,6 +8,7 @@ class ShoppingForm
     validates :municipality, presence: true
     validates :street_address, presence: true
     validates :phone_number, presence: true, length: { minimum: 10, maximum: 11 }, format: { with: /\A\d{10,11}\z/, message: "は10桁以上11桁以内の数値で入力してください" }
+    validates :shipping_from_id, presence: true, numericality: { other_than: 1, message: "can't be blank" }
     validates :item_id
     validates :user_id
   end
