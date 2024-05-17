@@ -25,7 +25,7 @@ class ItemsController < ApplicationController
     if current_user.nil?
       redirect_to new_user_session_path
     else
-      redirect_to root_path unless @item.user == current_user
+      redirect_to root_path unless @item.user == current_user && !@item.present?
     end
   end
 

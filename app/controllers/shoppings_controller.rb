@@ -1,12 +1,17 @@
 class ShoppingsController < ApplicationController
+  before_action :authenticate_user!
+  before_action :set_item, only: [:create, :index]
+
   def index
     gon.public_key = ENV["PAYJP_PUBLIC_KEY"]
-    @item = Item.find(params[:item_id])
     @shopping_form = ShoppingForm.new
+    redirect_to root_path if @item.user_id == current_user.id
+    if @item.shopping.present?
+      redirect_to root_path 
+    end
   end
 
   def create
-    @item = Item.find(params[:item_id])
     @shopping_form = ShoppingForm.new(shopping_form_params)
     if @shopping_form.valid?
       Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
@@ -16,7 +21,7 @@ class ShoppingsController < ApplicationController
         currency: 'jpy'
       )
       @shopping_form.save(params,current_user.id)
-      return  redirect_to root_path
+      redirect_to root_path
     else
       gon.public_key = ENV["PAYJP_PUBLIC_KEY"]
       render :index, status: :unprocessable_entity
@@ -24,6 +29,10 @@ class ShoppingsController < ApplicationController
   end
 
   private
+
+  def set_item
+    @item = Item.find(params[:item_id])
+  end
 
   def shopping_form_params
     params.require(:shopping_form).permit(:token,:user_id, :item_id, :post_code, :building_name, :shipping_from_id, :municipality, :street_address, :phone_number).merge(item_id: params[:item_id], user_id: current_user.id, token: params[:token])
