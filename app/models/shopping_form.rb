@@ -16,7 +16,7 @@ class ShoppingForm
   end
 
   def save(params,user_id)
-    @shopping = Shopping.create(user_id: user_id, item_id: params[:item_id])
-    Address.create(shopping_id :shopping.id ,post_code: post_code, building_name: building_name, shipping_from_id: shipping_from_id, municipality: municipality, street_address: street_address, phone_number: phone_number)
+    shopping = Shopping.create(user_id: user_id, item_id: params[:item_id])
+    Address.create(shopping_id: shopping.id, post_code: post_code, building_name: building_name, shipping_from_id: shipping_from_id, municipality: municipality, street_address: street_address, phone_number: phone_number)
   end
 end
