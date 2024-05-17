@@ -5,9 +5,8 @@ class ShoppingsController < ApplicationController
   def index
     gon.public_key = ENV["PAYJP_PUBLIC_KEY"]
     @shopping_form = ShoppingForm.new
-    redirect_to root_path if @item.user_id == current_user.id
-    if @item.shopping.present?
-      redirect_to root_path 
+    if @item.user_id == current_user.id || @item.shopping.present?
+      redirect_to root_path
     end
   end
 
