@@ -53,5 +53,12 @@ RSpec.describe ShoppingForm, type: :model do
       shopping_form.valid?
       expect(shopping_form.errors.full_messages).to include("Phone number is too short (minimum is 10 characters)")
     end
+
+    it 'クレジットカード情報が空の場合、無効であること'do
+    shopping_form.token = ''
+    shopping_form.valid?
+    expect(shopping_form.errors.full_messages).to include("Token can't be blank")
+  end
+
   end
 end
