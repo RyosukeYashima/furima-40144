@@ -20,12 +20,10 @@ class ItemsController < ApplicationController
 
   def show
   end
-
+  
   def edit
-    if current_user.nil?
-      redirect_to new_user_session_path
-    else
-      redirect_to root_path unless @item.user == current_user
+    if current_user != @item.user || @item.shopping.present?
+      redirect_to root_path
     end
   end
 
