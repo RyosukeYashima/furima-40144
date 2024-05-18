@@ -34,6 +34,6 @@ class ShoppingsController < ApplicationController
   end
 
   def shopping_form_params
-    params.require(:shopping_form).permit(:token,:user_id, :item_id, :post_code, :building_name, :shipping_from_id, :municipality, :street_address, :phone_number).merge(item_id: params[:item_id], user_id: current_user.id, token: params[:token])
+    params.require(:shopping_form).permit(:post_code, :building_name, :shipping_from_id, :municipality, :street_address, :phone_number).merge(item_id: params[:item_id], user_id: current_user.id, token: params[:token])
   end
 end
