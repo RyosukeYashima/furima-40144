@@ -1,15 +1,18 @@
-window.addEventListener('turbo:load', () => {
-  const priceInput = document.getElementById("item-price");
-  const salesFeeElement = document.getElementById("add-tax-price");
-  const profitElement = document.getElementById("profit");
+const price = () => {
 
-  if (priceInput && salesFeeElement && profitElement) {
-    priceInput.addEventListener("input", () => {
-      const price = parseInt(priceInput.value, 10) || 0;
-      const salesFee = Math.floor(price * 0.1); // 販売手数料（10%）
-      const profit = price - salesFee; // 販売利益
-      salesFeeElement.textContent = salesFee.toLocaleString();
-      profitElement.textContent = profit.toLocaleString();
-    });
-  }
-});
+  const priceInput = document.getElementById("item-price");
+  priceInput.addEventListener("input", () => {
+    const inputValue = priceInput.value;
+
+    const addTaxDom = Math.floor(inputValue * 0.1);
+    const addTaxDomElement = document.getElementById("add-tax-price");
+    addTaxDomElement.textContent = addTaxDom;
+
+    const salesProfit = Math.floor(inputValue * 0.9);
+    const salesProfitElement = document.getElementById("profit");
+    salesProfitElement.textContent = salesProfit;
+  });
+};
+
+window.addEventListener("turbo:load", price);
+window.addEventListener("turbo:render", price);
